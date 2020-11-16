@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5dbf32f3a6fe64787bc2a2554b9d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeedCap: 1000
-  xAcceleration: 4
+  xSpeedCap: 10
+  xAcceleration: 40
   jumpCooldown: 0
 --- !u!70 &862702305010757243
 CapsuleCollider2D:

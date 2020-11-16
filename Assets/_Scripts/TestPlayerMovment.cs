@@ -9,6 +9,7 @@ public class TestPlayerMovment : MonoBehaviour
     public float jumpCooldown;
     Rigidbody2D body;
     bool hitting = false;
+    bool jumpLocked = false;
     float jumpTimer = 0;
     // Start is called before the first frame update
     void Start()
@@ -25,12 +26,17 @@ public class TestPlayerMovment : MonoBehaviour
     void OnTriggerExit2D()
     {
         hitting = false;
+        jumpLocked = false;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        jumpLocked = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(jumpTimer);
+        print(jumpLocked);
         if (Input.GetKey("d") && body.velocity.x <= xSpeedCap)
         {
             body.AddForce(new Vector2(xAcceleration * Time.deltaTime, 0));
@@ -43,6 +49,7 @@ public class TestPlayerMovment : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, 5);
             jumpTimer = 0;
+            jumpLocked = true;
         }
         jumpTimer += Time.deltaTime;
     }

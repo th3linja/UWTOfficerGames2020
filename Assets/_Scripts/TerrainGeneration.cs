@@ -26,13 +26,14 @@ public class TerrainGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //pos = new Vector3(player.transform.position.x-rendDistance/2, player.transform.position.y-rendDistance/2, player.transform.position.z);
-        pos = player.transform.position;
-        //refreshMap();
-        if (Mathf.Abs(pos.x-tempPos.x)>1)
+        pos = new Vector3(player.transform.position.x-rendDistance/2, player.transform.position.y-rendDistance/2, player.transform.position.z);
+        //pos = player.transform.position;
+        refreshMap();
+        /*if (Mathf.Abs(pos.x-tempPos.x)>1)
         {
             refreshMap();
         }
+        */
         /*
         for(int x=0; x<rendDistance; x++)
         {
@@ -60,9 +61,9 @@ public class TerrainGeneration : MonoBehaviour
                     tileMap.SetTile(new Vector3Int((int)(x + pos.x), (int)(y + pos.y), 0), tile);
                 }
                 */
-                if (Mathf.PerlinNoise(pos.x+x, pos.y+y) > .5)
+                if (Mathf.PerlinNoise((x + Mathf.Round(pos.x))*scale, y + Mathf.Round(pos.y))*scale > .5)
                 {
-                    tileMap.SetTile(new Vector3Int((int)(x + pos.x), (int)(y + pos.y), 0), tile);
+                    tileMap.SetTile(new Vector3Int((int)(x + Mathf.Round(pos.x)), (int)(y + Mathf.Round(pos.y)), 0), tile);
                 }
             }
         }

@@ -7,49 +7,51 @@ public class TestPlayerMovment : MonoBehaviour
     public float xSpeedCap;
     public float xAcceleration;
     public float jumpCooldown;
+    public float jumpStrength;
     Rigidbody2D body;
-    bool hitting = false;
-    bool jumpLocked = false;
+    SpriteRenderer spriteRen;
     float jumpTimer = 0;
+    bool hitting;
     // Start is called before the first frame update
     void Start()
     {
         body = this.GetComponent<Rigidbody2D>();
+        spriteRen = this.GetComponent<SpriteRenderer>();
         jumpTimer = jumpCooldown;
     }
 
-    void OnTriggerEnter2D()
+    private void OnCollisionStay2D(Collision2D collision)
     {
+        if (Input.GetKey("space") && body.velocity.y <= 0 && jumpTimer >= jumpCooldown)
+        {
+            body.velocity = new Vector2(body.velocity.x, jumpStrength);
+            jumpTimer = 0;
+        }
+
         hitting = true;
     }
 
-    void OnTriggerExit2D()
-    {
-        hitting = false;
-        jumpLocked = false;
-    }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        jumpLocked = false;
+        hitting = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        print(jumpLocked);
+        //print(hitting);
         if (Input.GetKey("d") && body.velocity.x <= xSpeedCap)
         {
             body.AddForce(new Vector2(xAcceleration * Time.deltaTime, 0));
+            spriteRen.flipX = false;
         }
-        if (Input.GetKey("a") && body.velocity.x >= -xSpeedCap)
+        else if (Input.GetKey("a") && body.velocity.x >= -xSpeedCap)
         {
             body.AddForce(new Vector2(-xAcceleration * Time.deltaTime, 0));
+            spriteRen.flipX = true;
         }
-        if (Input.GetKey("space") && body.velocity.y <= 0 && hitting && jumpTimer >= jumpCooldown)
+        else if(hitting)
         {
-            body.velocity = new Vector2(body.velocity.x, 5);
-            jumpTimer = 0;
-            jumpLocked = true;
+            body.velocity = new Vector2(body.velocity.x / 1.1f, body.velocity.y);
         }
         jumpTimer += Time.deltaTime;
     }

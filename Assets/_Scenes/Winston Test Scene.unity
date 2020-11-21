@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 777331172}
   - component: {fileID: 777331170}
   - component: {fileID: 777331169}
+  - component: {fileID: 777331171}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -466,8 +467,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 507d7ab6c8f9b3d4ebdb6b136b6eb10c, type: 2}
   player: {fileID: 819106722}
-  rendDistance: 10
-  scale: 0
+  rendDistance: 35
+  scale: 0.82
 --- !u!483693784 &777331170
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -515,6 +516,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!19719996 &777331171
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777331167}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1839735485 &777331172
 Tilemap:
   m_ObjectHideFlags: 0
@@ -1065,6 +1082,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 862702305010757243, guid: dabdac6e0f5993e44802c9f31ee04560,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 862702305010757243, guid: dabdac6e0f5993e44802c9f31ee04560,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 6768468277717466672, guid: dabdac6e0f5993e44802c9f31ee04560,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1124,6 +1151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TestPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768468277717466679, guid: dabdac6e0f5993e44802c9f31ee04560,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dabdac6e0f5993e44802c9f31ee04560, type: 3}

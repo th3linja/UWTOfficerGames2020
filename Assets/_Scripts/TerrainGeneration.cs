@@ -13,6 +13,9 @@ public class TerrainGeneration : MonoBehaviour
     Vector3 pos;
     int[,] map;
     Vector3 tempPos;
+    int height = 0;
+    Random rand = new Random();
+    float moveHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,7 @@ public class TerrainGeneration : MonoBehaviour
         tempPos = pos;
         map = new int[rendDistance, rendDistance];
         //tileMap.SetTile(new Vector3Int(0, 0, 0), tile);
+        moveHeight = 0;
     }
 
     // Update is called once per frame
@@ -45,6 +49,20 @@ public class TerrainGeneration : MonoBehaviour
             }
         }
         */
+        print(height + " " + moveHeight);
+        if (moveHeight>.1f)
+        {
+            if (Random.Range(0, 10) == 7)
+            {
+                height += 1;
+            }
+            if (Random.Range(0, 10) == 1)
+            {
+                height -= 1;
+            }
+            moveHeight = 0;
+        }
+        moveHeight += Time.deltaTime;
     }
     
     private void refreshMap()
@@ -61,10 +79,17 @@ public class TerrainGeneration : MonoBehaviour
                     tileMap.SetTile(new Vector3Int((int)(x + pos.x), (int)(y + pos.y), 0), tile);
                 }
                 */
+                
                 if (Mathf.PerlinNoise((x + Mathf.Round(pos.x))*scale, y + Mathf.Round(pos.y))*scale > .5)
                 {
                     tileMap.SetTile(new Vector3Int((int)(x + Mathf.Round(pos.x)), (int)(y + Mathf.Round(pos.y)), 0), tile);
                 }
+                
+                /*if (y-rendDistance/2<height)
+                {
+                    tileMap.SetTile(new Vector3Int((int)(x + Mathf.Round(pos.x)), -y-height, 0), tile);
+                }
+                */
             }
         }
     }

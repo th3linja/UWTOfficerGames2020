@@ -23,6 +23,7 @@ public class ProceduralGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print(-Mathf.RoundToInt(yGenDist / 2) + " " + Mathf.RoundToInt(yGenDist / 2));
         pos = player.transform.position;
         xMax = xGenDist;
         heightRefresh = xGenDist;
@@ -31,9 +32,10 @@ public class ProceduralGeneration : MonoBehaviour
         {
             List<int> temp = new List<int>();
             //int y = -Mathf.RoundToInt(yGenDist/2);y< Mathf.RoundToInt(yGenDist / 2);y++
-            for (int y = -Mathf.RoundToInt(yGenDist / 2); y < Mathf.RoundToInt(yGenDist / 2); y++)
+            //int y =  anchor - Mathf.RoundToInt(yGenDist / 2); y < anchor + Mathf.RoundToInt(yGenDist / 2); y++
+            for (int y =  0; y < height+yGenDist; y++)
             {
-                if (y <= height)
+                if (y <= height || y >= height + caveHeight)
                 {
                     temp.Add(1);
                 }
@@ -74,11 +76,11 @@ public class ProceduralGeneration : MonoBehaviour
         {
             List<int> temp = new List<int>();
             //int y = height-groundDepth; y<=height+caveAltitude; y++
-            for (int y = -Mathf.RoundToInt(yGenDist / 2); y < Mathf.RoundToInt(yGenDist / 2); y++)
+            for (int y = 0; y < height + yGenDist; y++)
             {
                 //print(height);
                 //print(Random.Range(0, 2));
-                if (y <= height)
+                if (y <= height || y>=height+caveHeight)
                 {
                     temp.Add(1);
                 }

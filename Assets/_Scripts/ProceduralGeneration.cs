@@ -33,7 +33,7 @@ public class ProceduralGeneration : MonoBehaviour
             //int y = -Mathf.RoundToInt(yGenDist/2);y< Mathf.RoundToInt(yGenDist / 2);y++
             for (int y = -Mathf.RoundToInt(yGenDist / 2); y < Mathf.RoundToInt(yGenDist / 2); y++)
             {
-                if (y <= 0)
+                if (y <= height)
                 {
                     temp.Add(1);
                 }

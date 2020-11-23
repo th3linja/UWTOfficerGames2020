@@ -221,7 +221,7 @@ MonoBehaviour:
   height: 20
   player: {fileID: 819106722}
   ground: {fileID: 11400000, guid: f099bb991d0356746b7c1c21b864630b, type: 2}
-  anchor: 0
+  floor: {fileID: 11400000, guid: 2cb3bb8ab98659a4f9a553ae3d7e7cd0, type: 2}
 --- !u!483693784 &777331170
 TilemapRenderer:
   m_ObjectHideFlags: 0

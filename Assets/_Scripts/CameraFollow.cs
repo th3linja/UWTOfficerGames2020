@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Has the camera follow the player
     public GameObject player;
     private Vector3 velocity = Vector3.zero;
     void Start()

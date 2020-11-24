@@ -5,6 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class TerrainGeneration : MonoBehaviour
 {
+    /*
+     * 
+     * 
+     *      DEPRECIATED
+     * 
+     * 
+     */
     public Tile tile;
     public GameObject player;
     public int rendDistance;

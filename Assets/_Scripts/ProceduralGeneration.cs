@@ -17,6 +17,7 @@ public class ProceduralGeneration : MonoBehaviour
     public GameObject player;
     public Tile ground;
     public Tile floor;
+    public GameObject enemy;
     Tilemap tileMap;
     int heightRefresh;
     int xMax;
@@ -58,7 +59,6 @@ public class ProceduralGeneration : MonoBehaviour
     {
         // Updates Player Positon
         pos = player.transform.position;
-        print(height);
         // Changes cave height with reguards to world coordinates
         if (heightRefresh < pos.x)
         {
@@ -93,11 +93,22 @@ public class ProceduralGeneration : MonoBehaviour
                 }
                 else
                 {
-                    temp.Add(0);
+                    if (Random.Range(0, 100)==0 && xMax > 40)
+                    {
+                        temp.Add(2);
+                    }
+                    else
+                    {
+                        temp.Add(0);
+                    }
                 }
             }
             map.Add(temp);
         }
+    }
+
+    public void FixedUpdate()
+    {
         RefreshMap();
     }
 
@@ -117,6 +128,11 @@ public class ProceduralGeneration : MonoBehaviour
                         if (map[x][y] == 1)
                         {
                             tileMap.SetTile(new Vector3Int(x, y, 0), ground);
+                        }
+                        if (map[x][y] == 2)
+                        {
+                            Instantiate(enemy, new Vector3Int(x, y, 0), new Quaternion());
+                            map[x][y] = 0;
                         }
                     }
                 }

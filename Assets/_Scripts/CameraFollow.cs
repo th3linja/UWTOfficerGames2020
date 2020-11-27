@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
             //transform.Translate(new Vector3(((player.transform.position.x-transform.position.x)/.5f)*Time.deltaTime,0,0));
             //Vector3.SmoothDamp
             transform.position = Vector3.SmoothDamp(new Vector3(transform.position.x, transform.position.y, -10), 
-                new Vector3(player.transform.position.x, player.transform.position.y+2.25f, -10),ref velocity, 0.4f);
+                new Vector3(player.transform.position.x+7, player.transform.position.y+2.25f, -10),ref velocity, 0.4f);
         }
     }
 }

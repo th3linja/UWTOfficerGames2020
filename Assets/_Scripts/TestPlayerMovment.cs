@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TestPlayerMovment : MonoBehaviour
 {
@@ -11,12 +12,16 @@ public class TestPlayerMovment : MonoBehaviour
     public float jumpCooldown;
     public float jumpStrength;
     public Sprite deathSprite;
+    public Text score;
+    public AudioClip jumpSound;
+    public AudioClip deathSound;
     Rigidbody2D body;
     SpriteRenderer spriteRen;
     float jumpTimer = 0;
     bool hitting;
     bool dead = false;
     float deathTimer = 0;
+    int xMax;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +29,8 @@ public class TestPlayerMovment : MonoBehaviour
         spriteRen = this.GetComponent<SpriteRenderer>();
         jumpTimer = jumpCooldown;
         deathTimer = 0;
+        xMax = (int)transform.position.x;
+        score.text = "Distance: " + (xMax-3);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -31,6 +38,8 @@ public class TestPlayerMovment : MonoBehaviour
         // Checks if player is colliding, not falling, and jump is not on cooldown; before jumping
         if (Input.GetKey("space") && body.velocity.y <= 0 && jumpTimer >= jumpCooldown && !dead)
         {
+            transform.GetComponent<AudioSource>().clip = jumpSound;
+            transform.GetComponent<AudioSource>().Play();
             body.velocity = new Vector2(body.velocity.x, jumpStrength);
             jumpTimer = 0;
         }
@@ -40,6 +49,8 @@ public class TestPlayerMovment : MonoBehaviour
         if (collision.transform.CompareTag("Enemy"))
         {
             dead = true;
+            transform.GetComponent<AudioSource>().clip = deathSound;
+            transform.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -50,6 +61,11 @@ public class TestPlayerMovment : MonoBehaviour
 
     void Update()
     {
+        if (xMax < (int)transform.position.x)
+        {
+            xMax = (int)transform.position.x;
+        }
+        score.text = "Distance: " + (xMax - 3);
         //print(hitting);
         if (Input.GetKey("d") && body.velocity.x <= xSpeedCap)
         {
